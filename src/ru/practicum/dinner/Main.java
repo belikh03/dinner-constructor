@@ -42,9 +42,7 @@ public class Main {
         String dishType = scanner.nextLine();
         System.out.println("Введите название блюда:");
         String dishName = scanner.nextLine();
-        dc.addNewDish(dishType, dishName);
-
-        // добавьте новое блюдо
+        dc.addNewDish(dishType, dishName); // добавляет новое блюдо
     }
 
     private static void generateDishCombo() {
@@ -57,25 +55,23 @@ public class Main {
         System.out.println("Вводите типы блюда, разделяя символом переноса строки (enter). Для завершения ввода введите пустую строку");
         String nextItem = scanner.nextLine();
 
-        //реализуйте ввод типов блюд
+        //реализует ввод типов блюд
         ArrayList<String> combosDishesType = new ArrayList<>();
         while (!nextItem.isEmpty()) {
-            combosDishesType.add(nextItem);
+            if (dc.allDishesDyType.containsKey(nextItem)){
+                combosDishesType.add(nextItem);
+            } else {
+                System.out.println("Такой тип блюд отсутствует, введите другой тип.");
+            }
             nextItem = scanner.nextLine();
-
         }
 
-        // сгенерируйте комбинации блюд и выведите на экран
+        // генерирует комбинации блюд и выведите на экран
         HashMap<String, ArrayList<String>> combos = dc.generateDishCombo(combosDishesType, numberOfCombos);
         for (int i = 1; i <= numberOfCombos; i++) {
             String combo = "Комбо " + i;
             System.out.println(combo);
-           System.out.println(combos.get(combo));
+            System.out.println(combos.get(combo));
         }
-//        for (String combo : combos.keySet()) {
-//            System.out.println(combo);
-//            System.out.println(combos.get(combo));
-//        }
-
     }
 }
